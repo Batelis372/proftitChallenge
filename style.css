@@ -1,0 +1,13 @@
+.bookItem{
+    position: relative;
+}
+.favorite{
+    position: absolute;
+    top:10px;
+    left: 10px;
+}
+
+.favorite i{
+    color:yellow;
+    font-size: 30px;
+}

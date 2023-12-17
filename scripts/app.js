@@ -11,7 +11,8 @@ angular.module('Book', [
             // Allow same origin resource loads.
             'self',
             // Allow loading from our assets domain. **.
-            'https://www.googleapis.com/books/v1/volumes'
+            'https://www.googleapis.com/books/v1/volumes',
+            'https://www.googleapis.com/books/v1/volumes/*'
           ]);
         });
 
@@ -34,6 +35,10 @@ angular.module('BasicHttpAuth', [
         .when('/', {
             controller: 'BookController',
             templateUrl: 'modules/book/views/book-list.html'
+        })
+        .when('/favorites', {
+            controller: 'BookController',
+            templateUrl: 'modules/book/views/book-favorite-list.html'
         })
  
         .otherwise({ redirectTo: '/login' });

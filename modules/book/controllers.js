@@ -2,13 +2,15 @@
  
 angular.module('Book')
  
-.controller('BookController',function ($scope, BookService) {
+.controller('BookController',function ($scope, BookService, SpecificBookService) {
     $scope.searchTerm = "";
     $scope.books = [];
     $scope.totalItems = 0;
     $scope.currentPage =0,
     $scope.itemsPerPage = 3;
+    $scope.favoriteBookResults=[];
     $scope.favorites = JSON.parse(window.localStorage.getItem('favorites')) ||[];
+    loadAllFavorites();
 
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
@@ -50,5 +52,18 @@ angular.module('Book')
 
     function updateFavoriteStorage(){
         window.localStorage.setItem('favorites',JSON.stringify($scope.favorites));
+    }
+
+    function loadAllFavorites(){
+        for(const  value of  $scope.favorites){
+            debugger;
+            getSpecificBook(value)
+        }
+    }
+
+    function getSpecificBook(id){
+        SpecificBookService.query(id, function (response) {
+            $scope.favoriteBookResults.push(response);
+        });
     }
 });
